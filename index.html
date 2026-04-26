@@ -19,6 +19,7 @@
         * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+            box-sizing: border-box; /* Adicionado para garantir que o padding não quebre a largura */
         }
 
         body {
@@ -79,6 +80,7 @@
 
         .exercise-flex {
             display: flex;
+            flex-wrap: wrap; /* ADIÇÃO PARA RESPONSIVIDADE: Permite quebra de linha */
             gap: 0;
             align-items: stretch;
             border-radius: 8px;
@@ -89,7 +91,7 @@
 
         .code-side, .photo-side {
             flex: 1;
-            min-width: 0;
+            min-width: 320px; /* ADIÇÃO PARA RESPONSIVIDADE: Define uma largura mínima antes de quebrar */
         }
 
         pre {
@@ -101,6 +103,7 @@
             font-size: 12.5px; /* Diminuído levemente para o código respirar melhor */
             height: 100%;
             box-sizing: border-box;
+            overflow-x: auto; /* Garante que o código não extrapole em telas muito pequenas */
         }
 
         .screenshot-container {
@@ -142,6 +145,20 @@
             font-weight: bold;
         }
 
+        /* MEDIA QUERY PARA DISPOSITIVOS MÓVEIS */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .exercise-flex {
+                flex-direction: column; /* Força o empilhamento em telas pequenas */
+            }
+            .screenshot-container img {
+                height: auto; /* Permite que a imagem ajuste a altura proporcionalmente no celular */
+                max-height: 400px;
+            }
+        }
+
         /* CONFIGURAÇÕES ESPECÍFICAS DE IMPRESSÃO */
         @media print {
             body { padding: 0; background-color: white; }
@@ -153,6 +170,8 @@
             }
             .exercise-flex {
                 border: 1px solid #333;
+                flex-direction: row !important; /* Garante que no PDF fique sempre lado a lado */
+                flex-wrap: nowrap !important;
             }
             /* Remove o link sublinhado do hover no PDF */
             span[title] { border-bottom: none; }
