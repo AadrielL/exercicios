@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Exercícios - Adriel Morais</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #2980b9;
+            --code-bg: #1e1e1e;
+            --text: #333;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        /* FORÇAR CORES NO PDF (FUNDOS E BORDAS) */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px; /* Reduzi levemente para garantir que caiba na largura da folha A4 */
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 { color: var(--primary); margin: 0; font-size: 2.2em; }
+        .student-info { color: #7f8c8d; font-size: 1.2em; margin-top: 10px; font-weight: 500; }
+
+        h2 { color: var(--accent); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 50px; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { color: var(--primary); background: #ebf5fb; padding: 10px; border-radius: 4px; border-left: 5px solid var(--accent); margin-bottom: 15px; }
+
+        .description-box {
+            background: #fdfefe;
+            border: 1px solid #e1e8ed;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            page-break-inside: avoid; /* Evita que a descrição quebre sozinha */
+        }
+
+        /* AJUSTE PARA O PASSAR O MOUSE (TOOLTIPS) */
+        span[title] {
+            border-bottom: 1px dashed var(--accent);
+            cursor: help;
+            transition: background 0.3s;
+        }
+        span[title]:hover {
+            background: rgba(41, 128, 185, 0.2);
+        }
+
+        /* --- ESTRUTURA LADO A LADO --- */
+        section {
+            page-break-inside: avoid; /* O PULO DO GATO: impede que o exercício quebre entre páginas */
+            break-inside: avoid;
+            margin-bottom: 40px;
+        }
+
+        .exercise-flex {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .code-side, .photo-side {
+            flex: 1;
+            min-width: 0;
+        }
+
+        pre {
+            background: var(--code-bg) !important; /* !important garante o fundo preto no PDF */
+            color: #dcdcdc !important;
+            padding: 25px;
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12.5px; /* Diminuído levemente para o código respirar melhor */
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .screenshot-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #000;
+        }
+
+        .screenshot-container p {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            margin: 0;
+            padding: 4px 12px;
+            font-size: 0.65em;
+            text-transform: uppercase;
+            font-weight: bold;
+            z-index: 10;
+            border-bottom-left-radius: 4px;
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            height: 420px; /* Altura otimizada para caber código + foto em uma folha A4 */
+            display: block;
+            object-fit: cover;
+            object-position: top left;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            color: #bdc3c7;
+            font-weight: bold;
+        }
+
+        /* CONFIGURAÇÕES ESPECÍFICAS DE IMPRESSÃO */
+        @media print {
+            body { padding: 0; background-color: white; }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                padding: 0;
+            }
+            .exercise-flex {
+                border: 1px solid #333;
+            }
+            /* Remove o link sublinhado do hover no PDF */
+            span[title] { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Relatório Técnico de Programação</h1>
+        <div class="student-info">Adriel Morais da Silva </div>
+    </header>
+
+    <h2>1. Estrutura Base do Programa</h2>
+    <div class="description-box">
+        O programa utiliza uma estrutura de <strong>Menu Interativo</strong> dentro de um laço <code>while</code>, permitindo a execução modular de 8 exercícios lógicos.
+    </div>
+    <pre>
+<span title="O Pacote de Ferramentas: O computador vem de fábrica com funções básicas. O 'import' é você conectando extensões para ele entender padrões mundiais (Locale) e conseguir 'ouvir' o teclado (Scanner).">import java.util.Locale;
+import java.util.Scanner;</span>
+
+<span title="A Grande Fronteira: Aqui você define o nome do seu projeto. Pense como o título de um livro; tudo o que escreveremos agora faz parte desta obra.">public class ListaExerciciosCondicional</span> <span title="Início do Território: Esta chave abre as fronteiras do seu programa. Tudo o que estiver abaixo dela pertence à 'família' do seu código.">{</span>
+
+    <span title="O Portão Principal: É o 'Start'. Quando você aperta o play, o computador corre direto para cá. Se não tiver esse nome, ele fica perdido e não sabe por onde começar.">public static void main(String[] args)</span> <span title="Início da Ação: Esta chave abre o bloco de execução. O computador vai seguir os passos aqui de dentro, um por um.">{</span>
+
+        <span title="O Tradutor de Números: Em alguns lugares usa-se vírgula (10,5), mas o computador prefere o padrão universal com ponto (10.5). Isso aqui evita que ele trave ao ler números decimais.">Locale.setDefault(Locale.US);</span>
+
+        <span title="O Ouvido do Computador: Criamos um sensor chamado 'sc'. Ele fica 'escutando' o que você digita. Quando precisamos de um dado, chamamos o 'sc'.">Scanner sc = new Scanner(System.in);</span>
+
+        <span title="Gaveta de Memória: Criamos um espaço chamado 'escolha' para guardar números inteiros. Colocamos '-1' lá dentro só para a gaveta não começar vazia.">int escolha = -1;</span>
+
+        <span title="O Laço de Repetição: Enquanto a sentença (escolha diferente de zero) for VERDADEIRA, o computador fica preso neste bloco. É o famoso 'Faça até que...'.">while (escolha != 0)</span> <span title="Início do Ciclo: Esta chave abre o bloco que vai se repetir. Tudo aqui dentro vai rodar de novo toda vez que o exercício terminar.">{</span>
+
+            <span title="Voz do Computador: Ele imprime o texto do menu para você saber em qual botão apertar.">System.out.println("\n===========================================");
+            System.out.println("   MENU DE EXERCICIOS (Estrutura Condicional)");
+            System.out.println("   1 a 8 - Executar Exercicio");
+            System.out.println("   0     - Sair do Programa");
+            System.out.println("===========================================");
+            System.out.print("Escolha uma opcao: ");</span>
+
+            <span title="Captura de Pensamento: O computador para e fica esperando você digitar. O número que você enviar vai direto para a gaveta 'escolha'.">escolha = sc.nextInt();</span>
+
+            <span title="O Desvio (Sentença Condicional): Se a preposição 'escolha é igual a 0' for VERDADE, o computador entra aqui.">if (escolha == 0)</span> <span title="Início do Encerramento: Chave que abre o caminho de saída.">{</span>
+                <span title="Despedida: O computador avisa que está indo embora.">System.out.println("Programa encerrado. Bons estudos, Adriel!");</span>
+                <span title="A Quebra: Este comando quebra a barreira do 'while' e joga o computador para fora do ciclo.">break;</span>
+            <span title="Fim do Encerramento: Fecha o caminho de saída.">}</span>
+
+            <span title="O Painel Seletor: Em vez de fazer 8 perguntas separadas, usamos este 'elevador'. Você diz o andar (número) e ele te leva para a sala certa.">switch (escolha)</span> <span title="Início das Salas: Abre o conjunto de opções disponíveis.">{</span>
+                <span title="Andar 1: Se o valor for 1, o computador pula para a sala do Exercício 01. O 'break' serve para ele não sair entrando nas outras salas em sequência.">case 1: exercicio01(sc); break;</span>
+                <span title="Andar 2: Se for 2, pula para a sala do Exercício 02.">case 2: exercicio02(sc); break;</span>
+                <span title="Andar 3: Se for 3, pula para a sala do Exercício 03.">case 3: exercicio03(sc); break;</span>
+                <span title="Andar 4: Se for 4, pula para a sala do Exercício 04.">case 4: exercicio04(sc); break;</span>
+                <span title="Andar 5: Se for 5, pula para a sala do Exercício 05.">case 5: exercicio05(sc); break;</span>
+                <span title="Andar 6: Se for 6, pula para a sala do Exercício 06.">case 6: exercicio06(sc); break;</span>
+                <span title="Andar 7: Se for 7, pula para a sala do Exercício 07.">case 7: exercicio07(sc); break;</span>
+                <span title="Andar 8: Se for 8, pula para a sala do Exercício 08.">case 8: exercicio08(sc); break;</span>
+                <span title="O 'Andar Errado': Se você digitar um número que não tem sala (como 99), o computador avisa que não encontrou o destino.">default:
+                    System.out.println("Opcao invalida! Tente de 0 a 8.");</span>
+            <span title="Fim das Salas: Fecha o painel de seleção.">}</span>
+        <span title="Fim do Ciclo: Esta chave diz ao computador para voltar ao topo do 'while' e perguntar: 'Ainda é verdade que a escolha não é zero?'.">}</span>
+    <span title="Fim da Ação: Encerra o bloco de comandos principal do programa.">}</span>
+<span title="Fim do Território: Fecha a obra completa da sua classe.">}</span>
+</pre>
+
+    <section>
+        <h2>1.2 Função Auxiliar de Navegação</h2>
+        <div class="description-box">
+            <strong>Pensamento Computacional:</strong> Esta é uma função de <strong>reuso</strong>. Criamos um "módulo" que faz o trabalho sujo e nos devolve uma resposta lógica.
+        </div>
+
+        <pre>
+<span title="O Pequeno Auxiliar: Esta função pergunta ao usuário o que ele quer fazer em seguida e devolve um sinal lógico (booleano).">public static boolean desejaContinuar(Scanner sc)</span> <span title="Início da Função: Abre o espaço reservado para este diálogo com o usuário.">{</span>
+
+    <span title="Interface Simples: O computador imprime as opções na tela para que o usuário saiba como interagir.">System.out.println("\n-------------------------------------------");
+    System.out.println("[C] - Continuar neste exercicio");
+    System.out.println("[M] - Voltar ao Menu Principal");
+    System.out.print("Escolha: ");</span>
+
+    <span title="Processamento de Letra: O computador lê o texto, ignora se é minúscula e pega apenas a primeira letra.">char resp = sc.next().toUpperCase().charAt(0);</span>
+
+    <span title="A Resposta Lógica: Se a letra for 'C', ele envia 'VERDADE' para quem chamou a função.">return resp == 'C';</span>
+
+<span title="Fim da Função: Encerra o diálogo.">}</span>
+    </pre>
+    </section>
+
+    <h2>2. Resoluções por Método</h2>
+
+    <section>
+        <h3>Exercício 01 - Negativo ou Positivo</h3>
+        <div class="description-box">
+            <strong>Lógica Computacional:</strong> Analisamos a posição de um número na reta real. Se ele estiver à esquerda da origem ($x < 0$), ele pertence ao conjunto dos números negativos.
+        </div>
+
+        <div class="exercise-flex">
+            <div class="code-side">
+                <pre>
+<span title="PÚBLICO: Qualquer parte do programa pode usar este exercício.
+ESTÁTICO: Pronto para uso imediato na memória.
+VOID: Executa a ação mas não devolve valor.">public static void exercicio01(Scanner sc)</span> <span title="Fronteira do Método: Aqui começa o código específico deste desafio.">{</span>
+
+    <span title="Ciclo de Repetição: O 'do' (Faça) garante que o exercício rode pelo menos uma vez.">do</span> <span title="Início do Loop: Abre o bloco de comandos que serão repetidos.">{</span>
+
+        <span title="Diálogo: O computador solicita a entrada de dados.">System.out.println("\n-> Exercicio 01 (Negativo/Positivo):");
+        System.out.print("Digite um numero: ");</span>
+
+        <span title="Alocação: Criamos a variável 'n' para guardar o número digitado.">int n = sc.nextInt();</span>
+
+        <span title="O Teste Lógico: Se a preposição 'n menor que 0' for VERDADEIRA, o computador segue o primeiro caminho.">if (n < 0)</span>
+            <span title="Caminho Verdade: Imprime que o número é Negativo.">System.out.println("RESULTADO: NEGATIVO");</span>
+
+        <span title="O Senão: Se a preposição acima for FALSA, o computador segue por aqui.">else</span>
+            <span title="Caminho Falso: Imprime que o número não é Negativo.">System.out.println("RESULTADO: NAO NEGATIVO");</span>
+
+    <span title="Condição de Repetição: Se o usuário quiser continuar, o ciclo recomeça.">} while (desejaContinuar(sc));</span>
+
+<span title="Fim do Método: Encerra o Exercício 01.">}</span>
+                </pre>
+            </div>
+
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="1.png" alt="Execução Exercício 01">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section>
+    <h3>Exercício 02 - Par ou Ímpar</h3>
+    <div class="description-box">
+        <strong>Lógica:</strong> Verifica se um número é par ou ímpar utilizando o operador de resto <code>% 2</code>.
+    </div>
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Acesso e Tipo: Método público (aberto), estático (pronto para uso) e vazio (não devolve troco de valor).">public static void exercicio02(Scanner sc)</span> <span title="Fronteira: Início das regras do exercício 02.">{</span>
+    <span title="Ciclo 'Faça': O computador começa a execução e só vai perguntar se deve parar lá no final.">do</span> <span title="Início do Loop: Abre o bloco de repetição.">{</span>
+        <span title="Diálogo: O computador pede o valor e o armazena na gaveta 'n'.">System.out.print("Digite um numero: ");
+        int n = sc.nextInt();</span>
+
+        <span title="A Mágica do Resto (%): Matematicamente, estamos testando se n é divisível por 2. O sinal '%' olha o que sobrou da divisão. Se sobrar zero (== 0), a sentença é VERDADEIRA.">if (n % 2 == 0)</span>
+            <span title="Caminho do Par: Se a divisão foi exata, o computador imprime que é PAR.">System.out.println("RESULTADO: PAR");</span>
+        <span title="O Caminho Alternativo: Se sobrou 1 na divisão (Sentença FALSA), o computador cai aqui.">else</span>
+            <span title="Caminho do Ímpar: Imprime que sobrou alguém sozinho, ou seja, é ÍMPAR.">System.out.println("RESULTADO: IMPAR");</span>
+
+    <span title="A Porteira: Chama a função auxiliar 1.2. Enquanto você disser 'C' (Verdade), o computador volta para o topo.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira: Fim das regras do exercício 02.">}</span></pre>
+        </div>
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="2.png" alt="Execução Exercício 02">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h3>Exercício 03 - Números Múltiplos</h3>
+    <div class="description-box">
+        <strong>Lógica:</strong> Verifica múltiplos entre dois números com a condição <code>(a % b == 0 || b % a == 0)</code>.
+    </div>
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Acesso: Método aberto (public), fixo na memória (static) e focado em ação, não em retorno (void).">public static void exercicio03(Scanner sc)</span> <span title="Fronteira: Início do bloco do Exercício 03.">{</span>
+    <span title="Ciclo Iterativo: 'Faça' os comandos abaixo enquanto a condição final for verdadeira.">do</span> <span title="Início do Loop: Abre a área de repetição.">{</span>
+        <span title="Entrada Dupla: O computador solicita dois valores e reserva duas gavetas de memória ('a' e 'b') para guardá-los.">System.out.print("Digite dois numeros: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();</span>
+
+        <span title="O Conectivo 'OU' (||): Matematicamente, testamos se (A dividido por B sobra zero) OU (B dividido por A sobra zero). Se QUALQUER uma das frases for VERDADE, o resultado final é VERDADE.">if (a % b == 0 || b % a == 0)</span>
+            <span title="Conclusão Positiva: Se o teste lógico passou, o computador confirma a multiplicidade.">System.out.println("RESULTADO: Sao Multiplos");</span>
+        <span title="O Senão: Se as DUAS preposições forem FALSAS, o computador cai aqui.">else</span>
+            <span title="Conclusão Negativa: Imprime que os números não possuem divisão exata entre si.">System.out.println("RESULTADO: Nao sao Multiplos");</span>
+
+    <span title="Controle de Fluxo: Pergunta ao usuário se ele deseja realizar um novo teste.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira: Fim do bloco do Exercício 03.">}</span></pre>
+        </div>
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="3.png" alt="Execução Exercício 03">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h3>Exercício 04 - Duração do Jogo</h3>
+    <div class="description-box">
+        <strong>Lógica:</strong> Calcula a duração de um jogo usando <strong>operador ternário</strong> para tratar a virada do dia.
+    </div>
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Acesso: Função pública e pronta para uso (static) que executa uma ação sem devolver valores (void).">public static void exercicio04(Scanner sc)</span> <span title="Fronteira: Início do bloco da lógica de tempo.">{</span>
+    <span title="Ciclo Iterativo: O computador executa o cálculo e depois pergunta se você quer testar outro horário.">do</span> <span title="Início do Loop: Abre o espaço de repetição.">{</span>
+        <span title="Entrada de Dados: O computador solicita a hora inicial ('i') e a final ('f').">System.out.print("Hora inicial e final: ");
+        int i = sc.nextInt();
+        int f = sc.nextInt();</span>
+
+        <span title="O Operador de Atalho (Ternário): Pergunta se i < f. Se SIM, subtrai (f-i). Se NÃO (passou da meia-noite), faz (24-i+f).">int d = (i < f) ? (f - i) : (24 - i + f);</span>
+
+        <span title="Resultado Final: O computador exibe a duração total guardada na variável 'd'.">System.out.println("RESULTADO: O JOGO DUROU " + d + " HORA(S)");</span>
+
+    <span title="Navegação: Chama a função 1.2 para decidir se volta ao início ou encerra.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira: Fim do bloco de duração.">}</span></pre>
+        </div>
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="4.png" alt="Execução Exercício 04">
+            </div>
+        </div>
+    </div>
+</section>
+        </div>
+                </section>
+            </div>
+
+    </section>
+
+<section>
+    <h3>Exercício 05 - Sistema de Caixa</h3>
+    <div class="description-box">
+        <strong>Lógica de Seleção:</strong> O computador funciona como um leitor de código de barras. Ele testa o código digitado contra uma tabela de preços fixa usando uma "escada" de <code>if-else if</code> até encontrar a correspondência correta.
+    </div>
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Definição do Método: Função pública e estática que processa a venda e não retorna valor (void).">public static void exercicio05(Scanner sc)</span> <span title="Fronteira Inicial: Abre o espaço de memória para o sistema de caixa.">{</span>
+    <span title="Ciclo Repetitivo: Permite que o usuário registre vários itens sem precisar reiniciar o programa.">do</span> <span title="Início da Operação: Abre o bloco de comandos para calcular o pedido.">{</span>
+        <span title="Entrada de Dados: O computador solicita o 'ID' do produto e a quantidade desejada.">System.out.print("Codigo e quantidade: ");
+        int c = sc.nextInt();
+        int q = sc.nextInt();</span>
+
+        <span title="Variável de Armazenamento: Reserva uma gaveta decimal (double) para guardar o valor total da conta.">double t;</span>
+
+        <span title="Teste 01: 'O código é 1?'. Se sim, multiplica a quantidade por R$ 4.00.">if (c == 1) t = q * 4.0;</span>
+        <span title="Teste 02: 'Não era o 1? Então veja se é o 2'. Preço: R$ 4.50.">else if (c == 2) t = q * 4.5;</span>
+        <span title="Teste 03: 'Ainda não? Tente o código 3'. Preço: R$ 5.00.">else if (c == 3) t = q * 5.0;</span>
+        <span title="Teste 04: 'Seria o código 4?'. Preço: R$ 2.00.">else if (c == 4) t = q * 2.0;</span>
+        <span title="Caso Padrão: Se não for nenhum dos códigos acima, o computador assume o último preço da tabela (R$ 1.50).">else t = q * 1.5;</span>
+
+        <span title="Saída de Dinheiro: O '%.2f' formata o número para exibir centavos (ex: 10.50) e o '%n' pula uma linha.">System.out.printf("RESULTADO: Total: R$ %.2f%n", t);</span>
+
+    <span title="Verificação de Retorno: Chama a função auxiliar para decidir se continua vendendo ou volta ao menu.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira Final: Fecha o bloco do sistema de caixa.">}</span></pre>
+        </div>
+
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="5.png" alt="Execução Exercício 05">
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h3>Exercício 06 - Verificação de Intervalos</h3>
+    <div class="description-box">
+        <strong>Pensamento Matemático:</strong> Trabalhamos com <strong>Intervalos Fechados e Abertos</strong>. Usamos o operador <code>&&</code> porque o número precisa atender a duas condições ao mesmo tempo: ser maior que o limite inicial E menor que o limite final.
+    </div>
+
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Assinatura: Função pública e fixa na memória que processa números decimais (double).">public static void exercicio06(Scanner sc)</span> <span title="Fronteira Inicial: Inicia o espaço de verificação de conjuntos numéricos.">{</span>
+    <span title="Ciclo Iterativo: Permite testar vários números na reta real um após o outro.">do</span> <span title="Início do Teste: Abre o bloco para classificar o valor digitado.">{</span>
+        <span title="Entrada de Dados: O computador pausa e espera você digitar um número (pode ter ponto decimal).">System.out.print("Digite um valor: ");
+        double v = sc.nextDouble();</span>
+
+        <span title="Conjunção Lógica (&&): O computador pergunta: 'O valor é maior ou igual a 0 E também é menor ou igual a 25?'. Se ambas forem VERDADE, ele entra aqui.">if (v >= 0 && v <= 25)</span>
+            <span title="Resultado 1: O número pertence ao primeiro quarto da reta (0 a 25).">System.out.println("RESULTADO: Intervalo [0,25]");</span>
+
+        <span title="Escada de Exclusão: 'Não estava no primeiro? Verifique se está entre 25 e 50'.">else if (v > 25 && v <= 50)</span>
+            <span title="Resultado 2: O número pertence ao segundo quarto da reta.">System.out.println("RESULTADO: Intervalo (25,50]");</span>
+
+        <span title="Escada de Exclusão: 'Ainda não? Tente o intervalo de 50 a 75'.">else if (v > 50 && v <= 75)</span>
+            <span title="Resultado 3: O número está no terceiro quarto.">System.out.println("RESULTADO: Intervalo (50,75]");</span>
+
+        <span title="Escada de Exclusão: 'Última tentativa, está entre 75 e 100?'.">else if (v > 75 && v <= 100)</span>
+            <span title="Resultado 4: O número está no final da reta permitida.">System.out.println("RESULTADO: Intervalo (75,100]");</span>
+
+        <span title="Sentença Final: Se o computador percorreu toda a escada e não achou nenhuma verdade.">else</span>
+            <span title="Aviso: O número digitado é um 'intruso' (menor que 0 ou maior que 100).">System.out.println("RESULTADO: Fora de intervalo");</span>
+
+    <span title="Controle de Saída: Pergunta se você quer classificar outro número ou parar a análise.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira Final: Encerra o bloco de classificação de intervalos.">}</span></pre>
+        </div>
+
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="6.png" alt="Execução Exercício 06">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h3>Exercício 07 - Coordenadas Cartesianas</h3>
+    <div class="description-box">
+        <strong>Geometria Lógica:</strong> O computador atua como um navegador. Ele analisa os sinais de X e Y para decidir se o ponto está no centro (Origem), em cima das linhas (Eixos) ou em uma das quatro "áreas" do mapa (Quadrantes).
+    </div>
+
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Assinatura: Método público e estático que analisa coordenadas espaciais (X, Y).">public static void exercicio07(Scanner sc)</span> <span title="Fronteira Inicial: Inicia a análise do plano cartesiano.">{</span>
+    <span title="Ciclo de Localização: Permite que você jogue várias coordenadas para o computador identificar.">do</span> <span title="Início da Verificação: Abre o bloco de testes geométricos.">{</span>
+        <span title="Entrada de Coordenadas: O computador reserva dois espaços decimais para os eixos horizontal (X) e vertical (Y).">System.out.print("Digite X e Y: ");
+        double x = sc.nextDouble();
+        double y = sc.nextDouble();</span>
+
+        <span title="Teste da Origem: Se X é zero E TAMBÉM Y é zero, o ponto não saiu do lugar.">if (x == 0 && y == 0)</span> <span title="Resultado: O ponto está exatamente no cruzamento central.">System.out.println("RESULTADO: Origem");</span>
+
+        <span title="Teste de Eixo Vertical: Se X é zero (não foi para os lados), ele só pode estar andando em cima da linha vertical.">else if (x == 0)</span> <span title="Resultado: O ponto reside sobre o Eixo Y.">System.out.println("RESULTADO: Eixo Y");</span>
+
+        <span title="Teste de Eixo Horizontal: Se Y é zero (não foi para cima nem para baixo), ele está em cima da linha horizontal.">else if (y == 0)</span> <span title="Resultado: O ponto reside sobre o Eixo X.">System.out.println("RESULTADO: Eixo X");</span>
+
+        <span title="Q1: Ambos são positivos (Direita e Cima).">else if (x > 0 && y > 0)</span> System.out.println("RESULTADO: Q1");
+
+        <span title="Q2: X negativo e Y positivo (Esquerda e Cima).">else if (x < 0 && y > 0)</span> System.out.println("RESULTADO: Q2");
+
+        <span title="Q3: Ambos negativos (Esquerda e Baixo).">else if (x < 0 && y < 0)</span> System.out.println("RESULTADO: Q3");
+
+        <span title="Q4 (Padrão): Se não foi nenhum dos anteriores, só sobrou ser Direita e Baixo.">else</span> System.out.println("RESULTADO: Q4");
+
+    <span title="Controle de Navegação: Pergunta se você quer plotar um novo ponto no plano.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira Final: Encerra a análise de coordenadas.">}</span></pre>
+        </div>
+
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="7.png" alt="Execução Exercício 07">
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h3>Exercício 08 - Imposto de Renda</h3>
+    <div class="description-box">
+        <strong>Cálculo Progressivo:</strong> Diferente de uma conta comum, o Imposto de Renda é calculado por <strong>faixas</strong>. O computador "fatia" o salário: a primeira parte é grátis (isenta), a segunda paga um pouco, e assim por diante. É a lógica da progressividade tributária.
+    </div>
+
+    <div class="exercise-flex">
+        <div class="code-side">
+                <pre>
+<span title="Assinatura: Função pública e estática para processar cálculos financeiros de alta precisão (double).">public static void exercicio08(Scanner sc)</span> <span title="Fronteira Inicial: Inicia o simulador da Receita Federal.">{</span>
+    <span title="Ciclo Tributário: Permite calcular o imposto de vários salários diferentes.">do</span> <span title="Início do Cálculo: Abre o bloco de fatiamento do salário.">{</span>
+        <span title="Entrada: O computador recebe o valor do salário bruto.">double s = sc.nextDouble();
+        double imp;</span>
+
+        <span title="Faixa 1 (Isenção): Se o salário for até R$ 2000, a preposição 'isento' é VERDADE. O imposto é zero.">if (s <= 2000) imp = 0;</span>
+
+        <span title="Faixa 2 (8%): Se o salário está entre 2000 e 3000, o computador subtrai os 2000 que são grátis e calcula 8% apenas sobre o que sobrou.">else if (s <= 3000) imp = (s - 2000) * 0.08;</span>
+
+        <span title="Faixa 3 (18%): Aqui o computador já sabe que os primeiros 1000 acima da isenção pagam 8%, e ele calcula 18% apenas sobre o que passou de 3000.">else if (s <= 4500) imp = (1000 * 0.08) + (s - 3000) * 0.18;</span>
+
+        <span title="Faixa Final (28%): O caso máximo. O computador soma as taxas fixas das faixas anteriores e aplica 28% apenas sobre o excedente de 4500.">else imp = (1000 * 0.08) + (1500 * 0.18) + (s - 4500) * 0.28;</span>
+
+        <span title="Veredito Final: Se o resultado da soma de todas as fatias for zero, você não paga nada.">if (imp == 0) System.out.println("RESULTADO: Isento");</span>
+        <span title="Saída Monetária: Caso contrário, o computador exibe o valor acumulado com duas casas decimais.">else System.out.printf("RESULTADO: R$ %.2f%n", imp);</span>
+
+    <span title="Controle de Fluxo: Pergunta se o usuário deseja simular outro salário.">} while (desejaContinuar(sc));</span>
+<span title="Fronteira Final: Encerra o simulador de impostos.">}</span></pre>
+        </div>
+
+        <div class="photo-side">
+            <div class="screenshot-container">
+                <p>Resultado de Execução</p>
+                <img src="8.png" alt="Execução Exercício 08">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section>
+        <h2>Conclusão Técnica</h2>
+        <div class="description-box" style="border-left: 5px solid var(--primary); background: #f8f9fa;">
+            <p>A escolha de unificar os exercícios em um único sistema modularizado reflete uma abordagem focada em <strong>escalabilidade</strong> e <strong>organização de código</strong>. Através do uso de métodos estáticos e um menu central, o programa deixa de ser apenas uma lista de scripts isolados para se tornar uma aplicação estruturada, facilitando tanto a manutenção quanto a experiência de uso durante a fase de testes.</p>
+        </div>
+    </section>
+
+    <div class="footer">
+        Desenvolvido para fins acadêmicos - Palmas, TO - 2026
+    </div>
+</div>
+
+</body>
+</html>
