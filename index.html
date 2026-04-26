@@ -14,7 +14,22 @@
             --light-bg: #f4f7f6;
             --white: #ffffff;
         }
+         pre {
+    background: var(--code-bg) !important;
+    color: #dcdcdc !important;
+    padding: 25px;
+    margin: 0;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12.5px;
+    height: 100%;
+    box-sizing: border-box;
 
+    /* --- ADICIONE/AJUSTE ESTAS LINHAS --- */
+    white-space: pre-wrap;       /* Faz o texto quebrar linha se for muito longo */
+    word-wrap: break-word;       /* Força a quebra de palavras gigantes */
+    overflow-x: auto;            /* Se ainda assim algo vazar, ele cria scroll lateral */
+    max-width: 100%;             /* Garante que ele nunca seja maior que a tela */
+}
         /* FORÇAR CORES NO PDF (FUNDOS E BORDAS) */
         * {
             -webkit-print-color-adjust: exact !important;
