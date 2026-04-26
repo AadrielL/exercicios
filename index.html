@@ -14,21 +14,28 @@
             --light-bg: #f4f7f6;
             --white: #ffffff;
         }
-         pre {
+    pre {
     background: var(--code-bg) !important;
     color: #dcdcdc !important;
-    padding: 25px;
+    padding: 20px; /* Padding em px para manter respiro interno */
     margin: 0;
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 12.5px;
     height: 100%;
-    box-sizing: border-box;
 
-    /* --- ADICIONE/AJUSTE ESTAS LINHAS --- */
-    white-space: pre-wrap;       /* Faz o texto quebrar linha se for muito longo */
-    word-wrap: break-word;       /* Força a quebra de palavras gigantes */
-    overflow-x: auto;            /* Se ainda assim algo vazar, ele cria scroll lateral */
-    max-width: 100%;             /* Garante que ele nunca seja maior que a tela */
+    /* O SEGREDO DA PORCENTAGEM AQUI */
+    width: 100%;             /* Ocupa 100% do pai */
+    box-sizing: border-box;  /* Garante que o padding não "estoure" os 100% */
+    white-space: pre-wrap;   /* Força o texto a quebrar quando bater no fim da largura */
+    word-wrap: break-word;   /* Quebra palavras longas para não vazar */
+}
+
+/* Garanta que os lados também usem porcentagem no celular */
+@media (max-width: 768px) {
+    .code-side, .photo-side {
+        width: 100%;         /* Força a largura total do aparelho */
+        flex: 1 1 100%;      /* Ajusta no flexbox para ocupar 100% da tela */
+    }
 }
         /* FORÇAR CORES NO PDF (FUNDOS E BORDAS) */
         * {
