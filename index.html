@@ -14,29 +14,7 @@
             --light-bg: #f4f7f6;
             --white: #ffffff;
         }
-    pre {
-    background: var(--code-bg) !important;
-    color: #dcdcdc !important;
-    padding: 20px; /* Padding em px para manter respiro interno */
-    margin: 0;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 12.5px;
-    height: 100%;
 
-    /* O SEGREDO DA PORCENTAGEM AQUI */
-    width: 100%;             /* Ocupa 100% do pai */
-    box-sizing: border-box;  /* Garante que o padding não "estoure" os 100% */
-    white-space: pre-wrap;   /* Força o texto a quebrar quando bater no fim da largura */
-    word-wrap: break-word;   /* Quebra palavras longas para não vazar */
-}
-
-/* Garanta que os lados também usem porcentagem no celular */
-@media (max-width: 768px) {
-    .code-side, .photo-side {
-        width: 100%;         /* Força a largura total do aparelho */
-        flex: 1 1 100%;      /* Ajusta no flexbox para ocupar 100% da tela */
-    }
-}
         /* FORÇAR CORES NO PDF (FUNDOS E BORDAS) */
         * {
             -webkit-print-color-adjust: exact !important;
@@ -83,7 +61,6 @@
             page-break-inside: avoid;
         }
 
-        /* AJUSTE PARA O PASSAR O MOUSE (TOOLTIPS) */
         span[title] {
             border-bottom: 1px dashed var(--accent);
             cursor: help;
@@ -93,7 +70,6 @@
             background: rgba(41, 128, 185, 0.2);
         }
 
-        /* --- ESTRUTURA LADO A LADO --- */
         section {
             page-break-inside: avoid;
             break-inside: avoid;
@@ -102,7 +78,7 @@
 
         .exercise-flex {
             display: flex;
-            flex-wrap: wrap; /* ADIÇÃO PARA RESPONSIVIDADE */
+            flex-wrap: wrap;
             gap: 0;
             align-items: stretch;
             border-radius: 8px;
@@ -113,19 +89,26 @@
 
         .code-side, .photo-side {
             flex: 1;
-            min-width: 320px; /* ADIÇÃO PARA RESPONSIVIDADE */
+            min-width: 320px;
         }
 
+        /* ESTILO ÚNICO PARA O PRE - RESOLVE A ROLAGEM E QUEBRA */
         pre {
             background: var(--code-bg) !important;
             color: #dcdcdc !important;
-            padding: 25px;
+            padding: 20px;
             margin: 0;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 12.5px;
             height: 100%;
+            width: 100%;
             box-sizing: border-box;
+            display: block;
+
+            /* Ajuste para mobile: rola para o lado e permite quebra se necessário */
             overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .screenshot-container {
@@ -174,6 +157,11 @@
             }
             .exercise-flex {
                 flex-direction: column;
+                overflow: visible; /* Importante para não travar o scroll lateral */
+            }
+            .code-side, .photo-side {
+                width: 100%;
+                flex: 1 1 100%;
             }
             .screenshot-container img {
                 height: auto;
