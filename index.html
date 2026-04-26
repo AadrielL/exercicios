@@ -19,7 +19,7 @@
         * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            box-sizing: border-box; /* Adicionado para garantir que o padding não quebre a largura */
+            box-sizing: border-box;
         }
 
         body {
@@ -31,7 +31,7 @@
         }
 
         .container {
-            max-width: 1200px; /* Reduzi levemente para garantir que caiba na largura da folha A4 */
+            max-width: 1200px;
             margin: 0 auto;
             background: var(--white);
             padding: 40px;
@@ -58,7 +58,7 @@
             padding: 15px;
             border-radius: 6px;
             margin-bottom: 20px;
-            page-break-inside: avoid; /* Evita que a descrição quebre sozinha */
+            page-break-inside: avoid;
         }
 
         /* AJUSTE PARA O PASSAR O MOUSE (TOOLTIPS) */
@@ -73,14 +73,14 @@
 
         /* --- ESTRUTURA LADO A LADO --- */
         section {
-            page-break-inside: avoid; /* O PULO DO GATO: impede que o exercício quebre entre páginas */
+            page-break-inside: avoid;
             break-inside: avoid;
             margin-bottom: 40px;
         }
 
         .exercise-flex {
             display: flex;
-            flex-wrap: wrap; /* ADIÇÃO PARA RESPONSIVIDADE: Permite quebra de linha */
+            flex-wrap: wrap; /* ADIÇÃO PARA RESPONSIVIDADE */
             gap: 0;
             align-items: stretch;
             border-radius: 8px;
@@ -91,19 +91,19 @@
 
         .code-side, .photo-side {
             flex: 1;
-            min-width: 320px; /* ADIÇÃO PARA RESPONSIVIDADE: Define uma largura mínima antes de quebrar */
+            min-width: 320px; /* ADIÇÃO PARA RESPONSIVIDADE */
         }
 
         pre {
-            background: var(--code-bg) !important; /* !important garante o fundo preto no PDF */
+            background: var(--code-bg) !important;
             color: #dcdcdc !important;
             padding: 25px;
             margin: 0;
             font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 12.5px; /* Diminuído levemente para o código respirar melhor */
+            font-size: 12.5px;
             height: 100%;
             box-sizing: border-box;
-            overflow-x: auto; /* Garante que o código não extrapole em telas muito pequenas */
+            overflow-x: auto;
         }
 
         .screenshot-container {
@@ -130,7 +130,7 @@
 
         .screenshot-container img {
             width: 100%;
-            height: 420px; /* Altura otimizada para caber código + foto em uma folha A4 */
+            height: 420px;
             display: block;
             object-fit: cover;
             object-position: top left;
@@ -151,10 +151,10 @@
                 padding: 15px;
             }
             .exercise-flex {
-                flex-direction: column; /* Força o empilhamento em telas pequenas */
+                flex-direction: column;
             }
             .screenshot-container img {
-                height: auto; /* Permite que a imagem ajuste a altura proporcionalmente no celular */
+                height: auto;
                 max-height: 400px;
             }
         }
@@ -170,10 +170,9 @@
             }
             .exercise-flex {
                 border: 1px solid #333;
-                flex-direction: row !important; /* Garante que no PDF fique sempre lado a lado */
+                flex-direction: row !important;
                 flex-wrap: nowrap !important;
             }
-            /* Remove o link sublinhado do hover no PDF */
             span[title] { border-bottom: none; }
         }
     </style>
@@ -299,15 +298,14 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
             </div>
         </div>
     </section>
-</div>
 
-<section>
-    <h3>Exercício 02 - Par ou Ímpar</h3>
-    <div class="description-box">
-        <strong>Lógica:</strong> Verifica se um número é par ou ímpar utilizando o operador de resto <code>% 2</code>.
-    </div>
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 02 - Par ou Ímpar</h3>
+        <div class="description-box">
+            <strong>Lógica:</strong> Verifica se um número é par ou ímpar utilizando o operador de resto <code>% 2</code>.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Acesso e Tipo: Método público (aberto), estático (pronto para uso) e vazio (não devolve troco de valor).">public static void exercicio02(Scanner sc)</span> <span title="Fronteira: Início das regras do exercício 02.">{</span>
     <span title="Ciclo 'Faça': O computador começa a execução e só vai perguntar se deve parar lá no final.">do</span> <span title="Início do Loop: Abre o bloco de repetição.">{</span>
@@ -321,23 +319,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="A Porteira: Chama a função auxiliar 1.2. Enquanto você disser 'C' (Verdade), o computador volta para o topo.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira: Fim das regras do exercício 02.">}</span></pre>
-        </div>
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="2.png" alt="Execução Exercício 02">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="2.png" alt="Execução Exercício 02">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h3>Exercício 03 - Números Múltiplos</h3>
-    <div class="description-box">
-        <strong>Lógica:</strong> Verifica múltiplos entre dois números com a condição <code>(a % b == 0 || b % a == 0)</code>.
-    </div>
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 03 - Números Múltiplos</h3>
+        <div class="description-box">
+            <strong>Lógica:</strong> Verifica múltiplos entre dois números com a condição <code>(a % b == 0 || b % a == 0)</code>.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Acesso: Método aberto (public), fixo na memória (static) e focado em ação, não em retorno (void).">public static void exercicio03(Scanner sc)</span> <span title="Fronteira: Início do bloco do Exercício 03.">{</span>
     <span title="Ciclo Iterativo: 'Faça' os comandos abaixo enquanto a condição final for verdadeira.">do</span> <span title="Início do Loop: Abre a área de repetição.">{</span>
@@ -352,23 +350,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Controle de Fluxo: Pergunta ao usuário se ele deseja realizar um novo teste.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira: Fim do bloco do Exercício 03.">}</span></pre>
-        </div>
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="3.png" alt="Execução Exercício 03">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="3.png" alt="Execução Exercício 03">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h3>Exercício 04 - Duração do Jogo</h3>
-    <div class="description-box">
-        <strong>Lógica:</strong> Calcula a duração de um jogo usando <strong>operador ternário</strong> para tratar a virada do dia.
-    </div>
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 04 - Duração do Jogo</h3>
+        <div class="description-box">
+            <strong>Lógica:</strong> Calcula a duração de um jogo usando <strong>operador ternário</strong> para tratar a virada do dia.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Acesso: Função pública e pronta para uso (static) que executa uma ação sem devolver valores (void).">public static void exercicio04(Scanner sc)</span> <span title="Fronteira: Início do bloco da lógica de tempo.">{</span>
     <span title="Ciclo Iterativo: O computador executa o cálculo e depois pergunta se você quer testar outro horário.">do</span> <span title="Início do Loop: Abre o espaço de repetição.">{</span>
@@ -382,28 +380,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Navegação: Chama a função 1.2 para decidir se volta ao início ou encerra.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira: Fim do bloco de duração.">}</span></pre>
-        </div>
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="4.png" alt="Execução Exercício 04">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="4.png" alt="Execução Exercício 04">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-        </div>
-                </section>
-            </div>
-
     </section>
 
-<section>
-    <h3>Exercício 05 - Sistema de Caixa</h3>
-    <div class="description-box">
-        <strong>Lógica de Seleção:</strong> O computador funciona como um leitor de código de barras. Ele testa o código digitado contra uma tabela de preços fixa usando uma "escada" de <code>if-else if</code> até encontrar a correspondência correta.
-    </div>
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 05 - Sistema de Caixa</h3>
+        <div class="description-box">
+            <strong>Lógica de Seleção:</strong> O computador funciona como um leitor de código de barras. Ele testa o código digitado contra uma tabela de preços fixa usando uma "escada" de <code>if-else if</code> até encontrar a correspondência correta.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Definição do Método: Função pública e estática que processa a venda e não retorna valor (void).">public static void exercicio05(Scanner sc)</span> <span title="Fronteira Inicial: Abre o espaço de memória para o sistema de caixa.">{</span>
     <span title="Ciclo Repetitivo: Permite que o usuário registre vários itens sem precisar reiniciar o programa.">do</span> <span title="Início da Operação: Abre o bloco de comandos para calcular o pedido.">{</span>
@@ -423,24 +416,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Verificação de Retorno: Chama a função auxiliar para decidir se continua vendendo ou volta ao menu.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira Final: Fecha o bloco do sistema de caixa.">}</span></pre>
-        </div>
-
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="5.png" alt="Execução Exercício 05">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="5.png" alt="Execução Exercício 05">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section>
-    <h3>Exercício 06 - Verificação de Intervalos</h3>
-    <div class="description-box">
-        <strong>Pensamento Matemático:</strong> Trabalhamos com <strong>Intervalos Fechados e Abertos</strong>. Usamos o operador <code>&&</code> porque o número precisa atender a duas condições ao mesmo tempo: ser maior que o limite inicial E menor que o limite final.
-    </div>
+    </section>
 
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 06 - Verificação de Intervalos</h3>
+        <div class="description-box">
+            <strong>Pensamento Matemático:</strong> Trabalhamos com <strong>Intervalos Fechados e Abertos</strong>. Usamos o operador <code>&&</code> porque o número precisa atender a duas condições ao mesmo tempo: ser maior que o limite inicial E menor que o limite final.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Assinatura: Função pública e fixa na memória que processa números decimais (double).">public static void exercicio06(Scanner sc)</span> <span title="Fronteira Inicial: Inicia o espaço de verificação de conjuntos numéricos.">{</span>
     <span title="Ciclo Iterativo: Permite testar vários números na reta real um após o outro.">do</span> <span title="Início do Teste: Abre o bloco para classificar o valor digitado.">{</span>
@@ -464,25 +456,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Controle de Saída: Pergunta se você quer classificar outro número ou parar a análise.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira Final: Encerra o bloco de classificação de intervalos.">}</span></pre>
-        </div>
-
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="6.png" alt="Execução Exercício 06">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="6.png" alt="Execução Exercício 06">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <h3>Exercício 07 - Coordenadas Cartesianas</h3>
-    <div class="description-box">
-        <strong>Geometria Lógica:</strong> O computador atua como um navegador. Ele analisa os sinais de X e Y para decidir se o ponto está no centro (Origem), em cima das linhas (Eixos) ou em uma das quatro "áreas" do mapa (Quadrantes).
-    </div>
-
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 07 - Coordenadas Cartesianas</h3>
+        <div class="description-box">
+            <strong>Geometria Lógica:</strong> O computador atua como um navegador. Ele analisa os sinais de X e Y para decidir se o ponto está no centro (Origem), em cima das linhas (Eixos) ou em uma das quatro "áreas" do mapa (Quadrantes).
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Assinatura: Método público e estático que analisa coordenadas espaciais (X, Y).">public static void exercicio07(Scanner sc)</span> <span title="Fronteira Inicial: Inicia a análise do plano cartesiano.">{</span>
     <span title="Ciclo de Localização: Permite que você jogue várias coordenadas para o computador identificar.">do</span> <span title="Início da Verificação: Abre o bloco de testes geométricos.">{</span>
@@ -506,24 +496,23 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Controle de Navegação: Pergunta se você quer plotar um novo ponto no plano.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira Final: Encerra a análise de coordenadas.">}</span></pre>
-        </div>
-
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="7.png" alt="Execução Exercício 07">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="7.png" alt="Execução Exercício 07">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section>
-    <h3>Exercício 08 - Imposto de Renda</h3>
-    <div class="description-box">
-        <strong>Cálculo Progressivo:</strong> Diferente de uma conta comum, o Imposto de Renda é calculado por <strong>faixas</strong>. O computador "fatia" o salário: a primeira parte é grátis (isenta), a segunda paga um pouco, e assim por diante. É a lógica da progressividade tributária.
-    </div>
+    </section>
 
-    <div class="exercise-flex">
-        <div class="code-side">
+    <section>
+        <h3>Exercício 08 - Imposto de Renda</h3>
+        <div class="description-box">
+            <strong>Cálculo Progressivo:</strong> Diferente de uma conta comum, o Imposto de Renda é calculado por <strong>faixas</strong>. O computador "fatia" o salário: a primeira parte é grátis (isenta), a segunda paga um pouco, e assim por diante. É a lógica da progressividade tributária.
+        </div>
+        <div class="exercise-flex">
+            <div class="code-side">
                 <pre>
 <span title="Assinatura: Função pública e estática para processar cálculos financeiros de alta precisão (double).">public static void exercicio08(Scanner sc)</span> <span title="Fronteira Inicial: Inicia o simulador da Receita Federal.">{</span>
     <span title="Ciclo Tributário: Permite calcular o imposto de vários salários diferentes.">do</span> <span title="Início do Cálculo: Abre o bloco de fatiamento do salário.">{</span>
@@ -543,16 +532,15 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
 
     <span title="Controle de Fluxo: Pergunta se o usuário deseja simular outro salário.">} while (desejaContinuar(sc));</span>
 <span title="Fronteira Final: Encerra o simulador de impostos.">}</span></pre>
-        </div>
-
-        <div class="photo-side">
-            <div class="screenshot-container">
-                <p>Resultado de Execução</p>
-                <img src="8.png" alt="Execução Exercício 08">
+            </div>
+            <div class="photo-side">
+                <div class="screenshot-container">
+                    <p>Resultado de Execução</p>
+                    <img src="8.png" alt="Execução Exercício 08">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section>
         <h2>Conclusão Técnica</h2>
@@ -565,6 +553,5 @@ VOID: Executa a ação mas não devolve valor.">public static void exercicio01(S
         Desenvolvido para fins acadêmicos - Palmas, TO - 2026
     </div>
 </div>
-
 </body>
 </html>
